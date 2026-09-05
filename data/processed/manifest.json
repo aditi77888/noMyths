@@ -1,0 +1,31 @@
+{
+  "data_version": "1.0.0",
+  "created_at": "2026-09-05T00:00:00Z",
+  "texts": {
+    "rigveda": {
+      "version": "1.0.0",
+      "hash": "",
+      "last_updated": ""
+    },
+    "samaveda": {
+      "version": "1.0.0",
+      "hash": "",
+      "last_updated": ""
+    },
+    "yajurveda_shukla": {
+      "version": "1.0.0",
+      "hash": "",
+      "last_updated": ""
+    },
+    "yajurveda_krishna": {
+      "version": "1.0.0",
+      "hash": "",
+      "last_updated": ""
+    },
+    "atharvaveda": {
+      "version": "1.0.0",
+      "hash": "",
+      "last_updated": ""
+    }
+  }
+}

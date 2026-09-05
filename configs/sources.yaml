@@ -1,0 +1,17 @@
+# Sources Registry Configuration
+sources:
+  rigveda:
+    sanskrit: "gretil"
+    english: "griffith_sacred_texts"
+  samaveda:
+    sanskrit: "gretil"
+    english: "griffith_sacred_texts"
+  yajurveda_shukla:
+    sanskrit: "gretil"
+    english: "griffith_sacred_texts"
+  yajurveda_krishna:
+    sanskrit: "gretil"
+    english: "keith"
+  atharvaveda:
+    sanskrit: "gretil"
+    english: "whitney"

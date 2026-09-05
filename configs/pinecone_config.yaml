@@ -1,0 +1,9 @@
+# Pinecone Vector Database Configuration
+pinecone:
+  environment: "us-east-1"
+  index_name: "nomyths-vedas"
+  dimension: 1536
+  metric: "cosine"
+  namespaces:
+    en: "verses-en"
+    multilingual: "verses-multi"

@@ -1,0 +1,5 @@
+# Golden Set: Known claim -> expected verdict + expected citation
+- claim: "The Rigveda contains 10 Mandalas."
+  expected_verdict: "SUPPORTED"
+  expected_citation: "RV.General"
+  category: "structure"

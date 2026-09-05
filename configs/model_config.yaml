@@ -1,0 +1,9 @@
+# Model configurations for LLM classification, translation, and embeddings
+embedding_models:
+  english: "text-embedding-3-small"
+  multilingual: "text-embedding-3-large"
+
+llm_models:
+  classifier: "gemini-2.5-flash"
+  translator: "gemini-2.5-pro"
+  verdict: "gemini-2.5-pro"
