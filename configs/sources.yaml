@@ -1,17 +1,118 @@
-# Sources Registry Configuration
-sources:
+# configs/sources.yaml
+#
+# The single source of truth for "where did this text come from." Every
+# scraper reads its target list from here; docs/source_registry.md is
+# generated FROM this file, not maintained separately, so it never drifts.
+#
+# alignment_map: null means the source's own numbering IS the canonical
+# numbering (true for Rigveda, since English + Sanskrit share addressing
+# natively on sacred-texts.com). Non-null points to a mapping file in
+# configs/alignment_maps/ that the aligner.py stage applies.
+
+texts:
+
   rigveda:
-    sanskrit: "gretil"
-    english: "griffith_sacred_texts"
+    category: veda_samhita
+    english:
+      source_site: sacred-texts.com
+      base_url: https://www.sacred-texts.com/hin/rigveda/
+      translator: Griffith
+      translation_year: 1896
+      is_public_domain: true
+      scraper: sacred_texts_scraper
+    sanskrit:
+      source_site: sacred-texts.com
+      base_url: https://sacred-texts.com/hin/rvsan/
+      script: devanagari+iast
+      is_public_domain: true
+      scraper: sacred_texts_scraper
+      notes: >
+        One file per verse. Cross-linked with the English translation using
+        the same Book.Hymn.Verse numbering — no separate alignment map needed.
+    known_gaps:
+      # Sanskrit exists, Griffith never translated these — must be stored as
+      # english=null, not silently dropped or misaligned.
+      - "2.44-2.48"
+      - "3.63-3.69"
+      - "6.76-6.84"
+    alignment_map: null
+    status: v1_active
+
   samaveda:
-    sanskrit: "gretil"
-    english: "griffith_sacred_texts"
+    category: veda_samhita
+    english:
+      source_site: sacred-texts.com
+      base_url: https://sacred-texts.com/hin/sv/index.htm  # verify exact path when scraping
+      translator: Griffith
+      is_public_domain: true
+      scraper: sacred_texts_scraper
+    sanskrit:
+      source_site: sanskritdocuments.org
+      base_url: https://sanskritdocuments.org/sanskrit/veda/  # verify exact path when scraping
+      script: devanagari+iast
+      is_public_domain: true
+      scraper: sanskritdocuments_scraper
+      notes: >
+        Not natively cross-linked with the English translation's numbering.
+        Requires manual alignment pass before ingestion.
+    alignment_map: configs/alignment_maps/samaveda.yaml  # TODO: create
+    status: v1_pending_alignment
+
   yajurveda_shukla:
-    sanskrit: "gretil"
-    english: "griffith_sacred_texts"
+    category: veda_samhita
+    english:
+      source_site: sacred-texts.com
+      base_url: https://sacred-texts.com/hin/wyv/index.htm
+      translator: Griffith
+      is_public_domain: true
+      scraper: sacred_texts_scraper
+      notes: "White Yajurveda, Books 1-40, complete."
+    sanskrit:
+      source_site: gretil
+      base_url: null  # TODO: locate exact GRETIL Shukla Yajurveda file
+      script: iast
+      is_public_domain: true
+      scraper: gretil_scraper
+    alignment_map: configs/alignment_maps/yajurveda_shukla.yaml  # TODO: create
+    status: v1_pending_sanskrit_source
+
   yajurveda_krishna:
-    sanskrit: "gretil"
-    english: "keith"
+    category: veda_samhita
+    english:
+      source_site: sacred-texts.com
+      base_url: null  # TODO: locate exact Taittiriya Samhita index path
+      translator: Keith
+      translation_year: 1914
+      is_public_domain: true
+      scraper: sacred_texts_scraper
+      notes: "Taittiriya Samhita, Books 1-7 only — PARTIAL translation, not complete Krishna Yajurveda."
+    sanskrit:
+      source_site: gretil
+      base_url: null  # TODO: locate exact GRETIL Taittiriya Samhita file
+      script: iast
+      is_public_domain: true
+      scraper: gretil_scraper
+    alignment_map: configs/alignment_maps/yajurveda_krishna.yaml  # TODO: create
+    status: v1_pending_sanskrit_source
+
   atharvaveda:
-    sanskrit: "gretil"
-    english: "whitney"
+    category: veda_samhita
+    english:
+      source_site: sacred-texts.com
+      base_url: https://sacred-texts.com/hin/av/index.htm
+      translator: Griffith
+      translation_year: 1895
+      is_public_domain: true
+      scraper: sacred_texts_scraper
+      notes: >
+        Complete translation. An older PARTIAL Bloomfield translation exists
+        at a separate sbe42 path on the same site — do not scrape it, it is
+        superseded by this complete Griffith version.
+    sanskrit:
+      source_site: sanskritdocuments.org
+      base_url: null  # TODO: locate exact path
+      script: devanagari+iast
+      is_public_domain: true
+      scraper: sanskritdocuments_scraper
+    alignment_map: configs/alignment_maps/atharvaveda.yaml  # TODO: create
+    status: v1_pending_sanskrit_source

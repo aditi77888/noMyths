@@ -1,0 +1,21 @@
+# configs/pipeline_version.yaml
+#
+# Bump `version` manually whenever a change to scrapers/, pipeline/cleaner.py,
+# or pipeline/verse_segmenter.py could change parsed OUTPUT for existing
+# texts (e.g. fixing the verse-split regex, changing footnote stripping).
+#
+# Do NOT bump for changes that don't affect output (docstrings, type hints,
+# adding a new text's scraper that doesn't touch shared code).
+#
+# This exists so data_version can distinguish "same raw source, re-parsed
+# with fixed code" from "same everything, nothing changed" — a pure content
+# hash of the raw HTML can't tell those apart on its own, since the raw
+# HTML didn't change even though the parsed result did.
+
+version: "p1"
+
+changelog:
+  p1: >
+    Initial pipeline: sacred_texts_scraper (griffith_inline verse splitting),
+    cleaner (footnote stripping + NFC normalization), verse_segmenter.
+    Validated against Rigveda 10.129 (all 7 verses correct).

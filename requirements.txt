@@ -1,9 +1,39 @@
-fastapi>=0.110.0
-uvicorn>=0.28.0
-pydantic>=2.6.0
-pyyaml>=6.0.1
-requests>=2.31.0
-beautifulsoup4>=4.12.3
-pinecone-client>=3.0.0
-streamlit>=1.32.0
-pytest>=8.0.0
+# requirements.txt
+# Grouped by pipeline stage so it's clear what's needed for what — trim
+# groups you're not running yet (e.g. skip embeddings/retrieval deps until
+# you've got scraping + pipeline working end-to-end on Rigveda).
+
+# --- Scraping ---
+requests==2.32.3
+beautifulsoup4==4.12.3
+lxml==5.3.0                 # faster HTML parser backend for bs4
+tenacity==9.0.0             # retry/backoff, used in base_scraper.py
+
+# --- Pipeline / schema / config ---
+pydantic==2.9.2
+PyYAML==6.0.2
+
+# --- Translation backlog (LLM-assisted, for gap texts only) ---
+anthropic==0.39.0            # or your provider of choice for llm_translator.py
+
+# --- Embeddings ---
+sentence-transformers==3.2.1   # for BGE-small-en-v1.5 / BGE-m3
+torch                  # required by sentence-transformers; CPU build is fine to start
+
+# --- Vector store ---
+pinecone-client==5.0.1
+
+# --- Retrieval / verdict generation ---
+groq==0.11.0
+
+# --- API ---
+fastapi==0.115.5
+uvicorn[standard]==0.32.1
+python-dotenv==1.0.1
+
+# --- Frontend (v1 prototype) ---
+streamlit==1.40.1
+
+# --- Testing / eval ---
+pytest==8.3.3
+pyyaml==6.0.2                 # eval/golden_claims.yaml loading (dedup with above, kept for clarity)
